@@ -19,6 +19,8 @@ class MicropostsController < ApplicationController
     redirect_back_or root_path
   end
   
+  
+  
   private
   
     def authorized_user

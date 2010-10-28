@@ -233,5 +233,14 @@ form.new_micropost textarea {
   margin-bottom: 0;
 }
 
+.leftDiv {
+    float: left;
+    
+}
+
+.rightDiv {
+    float: right;
+    margin-right:4em;
+}
 
 

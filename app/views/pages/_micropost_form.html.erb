@@ -1,10 +1,15 @@
 <% form_for @micropost do |f| %>
   <%= f.error_messages %>
   <div class="field">
-    <%= f.text_area :content %>
+    <%= f.text_area :content, :onkeyup => "updateCount(this);", :maxlength => 140, :onkeypress => "return limitLength(this, event);" %>
   </div>
-  <div class="actions">
-    <%= f.submit "Submit" %>
+  <div class="actions leftDiv">
+    <%= f.submit "Submit" %>    
   </div>
+  <div class="actions rightDiv">
+    <%= f.label :Chars_Left, "Characters Left: "%>    
+    <%= f.label :Chars_Count, "140", :id => "chars_left" %>
+  </div>
+  
 <% end %>
 
