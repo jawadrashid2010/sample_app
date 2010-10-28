@@ -1,4 +1,20 @@
 # == Schema Information
+# Schema version: 20101028063126
+#
+# Table name: users
+#
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  encrypted_password :string(255)
+#  salt               :string(255)
+#  remember_token     :string(255)
+#  admin              :boolean
+#
+
+# == Schema Information
 # Schema version: 20101026100738
 #
 # Table name: users
@@ -13,6 +29,8 @@ require 'digest'
 class User < ActiveRecord::Base 
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
+  
+  has_many :microposts, :dependent => :destroy
 
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -43,6 +61,9 @@ class User < ActiveRecord::Base
     return user if user.has_password?(submitted_password)
   end
 
+  def feed
+    Micropost.all(:conditions => ["user_id = ?", id])    
+  end
 
   
   private
